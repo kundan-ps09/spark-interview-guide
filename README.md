@@ -2,7 +2,11 @@
 So, here is the Spark Interview Questions list which contains all types of interview Questions asked in Spark interview.
 
 **Q1. What is Apache Spark?**
-**Ans.  Spark is: **
+
+**Ans.**
+
+  Spark is: 
+  
 	- an open source big data framework. 
 	- It has an expressive APIs to efficiently execute streaming as well as the batch. 
 	- It provides faster and more general data processing platform engine. 
@@ -11,7 +15,6 @@ So, here is the Spark Interview Questions list which contains all types of inter
 	- It distributes data in file system across the cluster, and process that data in parallel. 
 	- It covers a wide range of workloads like batch applications, iterative algorithms, interactive queries and streaming. 
 	- It lets you write an application in Java, Python or Scala.
-
 	- It was developed to overcome the limitations of MapReduce cluster computing paradigm. 
 	- Spark keeps things in memory whereas map reduce keep shuffling things in and out of disk. 
 	- It allows to cache data in memory which is beneficial in iterative algorithm those used in machine learning.
