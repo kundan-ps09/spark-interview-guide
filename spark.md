@@ -23,4 +23,24 @@ So, here is the Spark Interview Questions list which contains all types of inter
 	  S3 from which spark can read and write. 
 	- In terms of speed spark run programs up to 100x faster in memory or 10x faster on disk than Map Reduce.
 
+**Q2. What is the need of Apache Spark?**
+
+**Ans.**  Basically, we had so many general purpose cluster computing tools. 
+
+For example:
+
+	> Hadoop MapReduce, 
+	> Apache Storm, 
+	> Apache Impala, 
+	> Apache Storm,
+	> Apache Giraph and many more. 
+But each one has some limitations in their functionality as well. Such as:
+
+	1. Hadoop MapReduce can only allow for batch processing.
+	2. If we talk about stream processing only Apache Storm / S4 can perform.
+	3. Again for interactive processing, we need Apache Impala / Apache Tez.
+	4. While we need to perform graph processing, we opt for Neo4j / Apache Giraph.
+
+Therefore, No single engine can perform all the tasks together. hence there was a big demand for a powerful engine that can process the data in real-time (streaming) as well as in batch mode
+Also, which can respond to sub-second and perform in-memory processing
 
