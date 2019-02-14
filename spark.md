@@ -75,9 +75,11 @@ Also, which can respond to sub-second and perform in-memory processing
 Spark makes use of Special data structure known as **RDD (Resilient Distributed Dataset)**. It is the home for API that defines and manipulate the RDDs. 
 
 All the basic functionality of Apache Spark Like 
+
 	- In-memory computation, 
 	- Fault tolerance, 
 	- Memory management,
 	- Monitoring, 
 	- Task scheduling 
+	
 is provided by Spark Core. Apart from this Spark also provides the basic connectivity with the data sources. For example, HBase, Amazon S3, HDFS etc.
