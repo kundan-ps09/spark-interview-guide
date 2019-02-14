@@ -29,11 +29,11 @@ So, here is the Spark Interview Questions list which contains all types of inter
 
 For example:
 
-	> Hadoop MapReduce, 
-	> Apache Storm, 
-	> Apache Impala, 
-	> Apache Storm,
-	> Apache Giraph and many more. 
+	- Hadoop MapReduce, 
+	- Apache Storm, 
+	- Apache Impala, 
+	- Apache Storm,
+	- Apache Giraph and many more. 
 But each one has some limitations in their functionality as well. Such as:
 
 	1. Hadoop MapReduce can only allow for batch processing.
@@ -64,3 +64,20 @@ Also, which can respond to sub-second and perform in-memory processing
 
 **GraphX:** GraphX is a library for manipulating graphs (e.g., a social network’s friend graph)and performing graph-parallel computations.
 
+**Q4. what is the basic data structure of Apache Spark Core?**
+
+**Ans.** Spark Core is the fundamental unit of the whole Spark project. It provides all sort of functionalities like
+
+	- Task dispatching
+	- Scheduling
+	- Input-output operations etc.
+	
+Spark makes use of Special data structure known as **RDD (Resilient Distributed Dataset)**. It is the home for API that defines and manipulate the RDDs. 
+
+All the basic functionality of Apache Spark Like 
+	- In-memory computation, 
+	- Fault tolerance, 
+	- Memory management,
+	- Monitoring, 
+	- Task scheduling 
+is provided by Spark Core. Apart from this Spark also provides the basic connectivity with the data sources. For example, HBase, Amazon S3, HDFS etc.
