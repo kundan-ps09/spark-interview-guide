@@ -44,3 +44,23 @@ But each one has some limitations in their functionality as well. Such as:
 Therefore, No single engine can perform all the tasks together. hence there was a big demand for a powerful engine that can process the data in real-time (streaming) as well as in batch mode
 Also, which can respond to sub-second and perform in-memory processing
 
+**Q3. What are the components of Spark Ecosystem?**
+
+**Ans.** Apache spark consists of following components:
+
+	1.Spark Core
+	2.Spark SQL
+	3.Spark Streaming
+	4.MLlib
+	5.GraphX
+
+**Spark Core:** Spark Core contains the basic functionality of Spark, including components for task scheduling, memory management, fault recovery, interacting with storage systems, and more. Spark Core is also home to the API that defines resilient distributed datasets (RDDs), which are Spark’s main programming abstraction.It also provides many APIs for building and manipulating these RDDS.
+
+**Spark SQL:** Spark SQL provides an interface to work with structured data.It allows querying in SQL as well as Apache Hivevariant of SQL(HQL).It supports many sources.
+
+**Spark Streaming:** It is spark component that enables processing of live streams of data.
+
+**MLlib:** Spark comes with common machine learning package called MLlib
+
+**GraphX:** GraphX is a library for manipulating graphs (e.g., a social network’s friend graph)and performing graph-parallel computations.
+
