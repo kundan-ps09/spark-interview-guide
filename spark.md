@@ -83,3 +83,23 @@ All the basic functionality of Apache Spark Like
 	- Task scheduling 
 	
 is provided by Spark Core. Apart from this Spark also provides the basic connectivity with the data sources. For example, HBase, Amazon S3, HDFS etc.
+
+**Q5.What are the benefits of Apache Spark over Apache Hadoop?**
+
+**Ans.** Apache Spark is lightening fast cluster computing tool. It is up to 100 times faster than Hadoop MapReduce due to its very fast in-memory data analytics processing power.
+
+Apache Spark surpasses Hadoop in many cases such as
+
+	1. Processing the data in memory which is not possible in Hadoop.
+	2. Processing the data that is in batch, iterative, interactive & streaming i.e. Real Time mode. 
+	   Whereas Hadoop processes only in batch mode.
+	3. Spark is faster because it reduces the number of disk read-write operations.
+	   Whereas in Hadoop MapReduce intermediate output which is output of Map() is always written 
+	   on local hard disk.
+	4. Apache Spark is easy to program as it has hundreds of high-level operators 
+	   with RDD (Resilient Distributed Dataset).
+	5. Apache Spark code is compact due compared to Hadoop MapReduce. 
+	   Use of Scala makes it very short, reduces programming efforts. 
+	   Also, Spark provides rich APIs in various languages such as Java, Scala, Python, and R.
+	6. Spark & Hadoop are both highly fault-tolerant.
+	7. Spark application running in Hadoop clusters is up to 10 times faster on disk than Hadoop MapReduce.
