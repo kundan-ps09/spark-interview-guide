@@ -29,10 +29,10 @@ So, here is the Spark Interview Questions list which contains all types of inter
 
 For example:
 
-	- Hadoop MapReduce, 
-	- Apache Storm, 
-	- Apache Impala, 
-	- Apache Storm,
+	- Hadoop MapReduce
+	- Apache Storm
+	- Apache Impala
+	- Apache Storm
 	- Apache Giraph and many more. 
 But each one has some limitations in their functionality as well. Such as:
 
@@ -76,10 +76,10 @@ Spark makes use of Special data structure known as **RDD (Resilient Distributed 
 
 All the basic functionality of Apache Spark Like 
 
-	- In-memory computation, 
-	- Fault tolerance, 
-	- Memory management,
-	- Monitoring, 
+	- In-memory computation 
+	- Fault tolerance
+	- Memory management
+	- Monitoring
 	- Task scheduling 
 	
 is provided by Spark Core. Apart from this Spark also provides the basic connectivity with the data sources. For example, HBase, Amazon S3, HDFS etc.
