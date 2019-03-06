@@ -112,3 +112,14 @@ Apache Spark surpasses Hadoop in many cases such as
 	        you can read and write data in HDFS
 	- Spark with Hive
 		you can read and analyse and write back to the hive
+**Q7. What is SparkContext in Apache Spark?**
+
+**Ans.** A SparkContext is a client of Spark’s execution environment and it acts as the master of the Spark application. SparkContext sets up internal services and establishes a connection to a Spark execution environment. You can create RDDs, accumulators and broadcast variables, access Spark services and run jobs (until SparkContext stops) after the creation of SparkContext. Only one SparkContext may be active per JVM. You must stop() the active SparkContext before creating a new one.
+
+The SparkContext allows the Spark driver application to access the cluster through a resource manager. The resource manager can be YARN, or Spark’s Cluster Manager.
+
+**Few functionalities which SparkContext offers are:**
+
+	1. We can get the current status of a Spark application like configuration, app name.
+	2. We can set Configuration like master URL, default logging level.
+	3. One can create Distributed Entities like RDDs.
