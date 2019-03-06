@@ -103,3 +103,12 @@ Apache Spark surpasses Hadoop in many cases such as
 	   Also, Spark provides rich APIs in various languages such as Java, Scala, Python, and R.
 	6. Spark & Hadoop are both highly fault-tolerant.
 	7. Spark application running in Hadoop clusters is up to 10 times faster on disk than Hadoop MapReduce.
+	
+**Q6. What are the different methods to run Spark over Apache Hadoop?**
+
+**Ans.**  Instead of MapReduce we can use spark on top of Hadoop ecosyste
+
+	-spark with HDFS
+	        you can read and write data in HDFS
+	-spark with Hive
+		you can read and analyse and write back to the hive
