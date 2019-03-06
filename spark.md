@@ -108,7 +108,7 @@ Apache Spark surpasses Hadoop in many cases such as
 
 **Ans.**  Instead of MapReduce we can use spark on top of Hadoop ecosyste
 
-	-spark with HDFS
+	- Spark with HDFS
 	        you can read and write data in HDFS
-	-spark with Hive
+	- Spark with Hive
 		you can read and analyse and write back to the hive
