@@ -123,3 +123,37 @@ The SparkContext allows the Spark driver application to access the cluster throu
 	1. We can get the current status of a Spark application like configuration, app name.
 	2. We can set Configuration like master URL, default logging level.
 	3. One can create Distributed Entities like RDDs.
+	
+**Q8.**Various ways to create contexts in spark ?**
+
+**Ans.** below are the verious way to create context
+
+	a. Sparkconext
+	b. Sqlcontext
+	c. Sparksession
+	d. Sqlcontext.sparkcontext
+	
+**set up the spark configuration and create contexts**
+
+	val sparkConf = new SparkConf().setAppName("SparkSessionExample").setMaster("local")
+	
+**to SparkContext to access other context like SQLContext**
+
+	val sc = new SparkContext(sparkConf).set("spark.some.config.option", "some-value")
+        val sqlContext = new SQLContext(sc)
+	
+**Whereas in Spark 2.0 the same effects can be achieved through SparkSession, without expliciting creating SparkConf, SparkContext or SQLContext, as they’re encapsulated within the SparkSession. 
+
+
+	val warehouseLocation = "file:${system:user.dir}/spark-warehouse"
+	val spark = SparkSession
+   	.builder()
+   	.appName("SparkSessionsExample")
+   	.config("spark.sql.warehouse.dir", warehouseLocation)
+   	.enableHiveSupport()
+   	.getOrCreate()
+	
+
+**Q9.Difference between map and flatmap?**
+
+**Ans. **
