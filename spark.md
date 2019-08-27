@@ -3,9 +3,8 @@ So, here is the Spark Interview Questions list which contains all types of inter
 
 **Q1. What is Apache Spark?**
 
-**Ans.** Spark is: 
-  
-	- An open source big data framework. 
+**Ans.** Apache Spark is a lightning-fast unified analytics engine for big data and machine learning. 
+
 	- It has an expressive APIs to efficiently execute streaming as well as the batch. 
 	- It provides faster and more general data processing platform engine. 
 	- It is basically designed for fast computation. 
@@ -104,6 +103,17 @@ Apache Spark surpasses Hadoop in many cases such as
 	6. Spark & Hadoop are both highly fault-tolerant.
 	7. Spark application running in Hadoop clusters is up to 10 times faster on disk than Hadoop MapReduce.
 	
+	
+
+**Spark vs Hadoop**
+
+| Criteria | Hadoop MapReduce | Apache Spark |
+| --- | --- | --- |
+| Memory | Does not leverage  the memory of the  hadoop cluster to maximum. | Let's save data on memory with the use of RDD's. |
+| Disk usage | MapReduce is disk oriented. | Spark caches data in-memory and ensures low latency. |
+| Processing | Only batch processing is supported | Supports real-time processing through spark streaming.|
+| Installation |Is bound to hadoop | Is not bound to Hadoop |
+
 **Q6. What are the different methods to run Spark over Apache Hadoop?**
 
 **Ans.**  Instead of MapReduce we can use spark on top of Hadoop ecosyste
