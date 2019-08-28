@@ -180,10 +180,19 @@ RDDs are automatically distributed across the network by means of Partitions.
 	-These partitions of an RDD is distributed across all the nodes in the network.
 	
 Actions/Transformations:
- 
+There are two types of operations that you can perform on an RDD- Transformations and Actions.
+
+	Transformation:
+        -Applies some function on a RDD and creates a new RDD, it does not modify the RDD that you apply the function on.
+    	 (Remember that RDDs are resilient/immutable).
+    	- Also, the new RDD keeps a pointer to it’s parent RDD.
+	
  ![rdd_transformation](rdd_transformation.png)
 
-	
+When you call a transformation, Spark does not execute it immediately, instead it creates a lineage. A lineage keeps track of what all transformations has to be applied on that RDD, including from where it has to read the data. For example, consider the below example
+
+![rdd_lineage](rdd_lineage.png)
+
 **Q9.Difference between map and flatmap?**
 
 **Ans. **
