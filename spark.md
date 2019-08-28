@@ -183,9 +183,9 @@ RDDs are automatically distributed across the network by means of Partitions.
 There are two types of operations that you can perform on an RDD- Transformations and Actions.
 
 	Transformation:
-        -Applies some function on a RDD and creates a new RDD, it does not modify the RDD that you apply the function on.
-    	 (Remember that RDDs are resilient/immutable).
-    	- Also, the new RDD keeps a pointer to it’s parent RDD.
+        -Applies some function on a RDD and creates a new RDD, it does not modify the RDD that you apply 
+	 the function on. (Remember that RDDs are resilient/immutable).
+    	-Also, the new RDD keeps a pointer to it’s parent RDD.
 	
  ![rdd_transformation](rdd_transformation.png)
 
@@ -222,6 +222,14 @@ caching can be used to avoid recomputation of RDD lineage by saving its contents
 In fact Caching is a type of persistence with StorageLevel -MEMORY_ONLY. If you use MEMORY_ONLY as the Storage Level and if there is not enough memory in your cluster to hold the entire RDD, then some partitions of the RDD cannot be stored in memory and will have to be recomputed every time it is needed. If you don’t want this to happen, you can use the StorageLevel - MEMORY_AND_DISK in which if an RDD does not fit in memory, the partitions that do not fit are saved to disk.
 
 ![rdd_persistence](rdd_persistence.png)
+
+In the above example, the RDD has 3 partitions and there are 2 nodes in the cluster. Also, memory available in the cluster can hold only 2 out of 3 partitions of the RDD. Here, partitions 1 and 2 can be saved in memory where as partition 3 will be saved to disk.
+Another StorageLevel are :
+ 
+ 	DISK_ONLY: stores all the partitions on the disk.
+	MEMORY_ONLY_SER: serialized before saving to Memory and store the RDDs as serialized java objects.
+	MEMORY_AND_DISK_SER: rialized before saving to Memory and disk, and store the RDDs as serialized java objects.
+
 
 **Q10.Why RDD is immutable ?**
 
