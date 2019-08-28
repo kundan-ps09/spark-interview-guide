@@ -199,10 +199,11 @@ When you call a transformation, Spark does not execute it immediately, instead i
   	println(rddContainNumber.toDebugString)
   	print(rddContainNumber.count())
 
-	- sparkSession.sparkContext.textFile() and rddTextFile.filter() do not get executed immediately.
-	- It will only get executed once you call an Action on the RDD - here rddContainNumber.count().
-	- An Action is used to either save result to some location or to display it.
-        - You can also print the RDD lineage information by using the command filtered.toDebugString(filtered is the RDD here).
+* sparkSession.sparkContext.textFile() and rddTextFile.filter() do not get executed immediately.
+* It will only get executed once you call an Action on the RDD - here rddContainNumber.count().
+* An Action is used to either save result to some location or to display it.
+* You can also print the RDD lineage information by using the command filtered.toDebugString(filtered is the RDD here).
+	
 **Caching**
 You can cache an RDD in memory by calling rdd.cache(). When you cache an RDD, it’s Partitions are loaded into memory of the nodes that hold it.
 
