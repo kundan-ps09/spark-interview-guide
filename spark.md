@@ -179,7 +179,7 @@ RDDs are automatically distributed across the network by means of Partitions.
 	 a task is launched per partition. 
 	-These partitions of an RDD is distributed across all the nodes in the network.
 	
-Actions/Transformations:
+**Actions/Transformations:**
 There are two types of operations that you can perform on an RDD- Transformations and Actions.
 
 	Transformation:
@@ -192,6 +192,34 @@ There are two types of operations that you can perform on an RDD- Transformation
 When you call a transformation, Spark does not execute it immediately, instead it creates a lineage. A lineage keeps track of what all transformations has to be applied on that RDD, including from where it has to read the data. For example, consider the below example
 
 ![rdd_lineage](rdd_lineage.png)
+
+	val rddTextFile = sparkSession.sparkContext.textFile("src/main/resources/bank-names.txt", 2)
+	val rddContainNumber = rddTextFile.filter(line => line.contains("Number")) //transformation
+  	println(rddTextFile.toDebugString)
+  	println(rddContainNumber.toDebugString)
+  	print(rddContainNumber.count())
+
+	- sparkSession.sparkContext.textFile() and rddTextFile.filter() do not get executed immediately.
+	- It will only get executed once you call an Action on the RDD - here rddContainNumber.count().
+	- An Action is used to either save result to some location or to display it.
+        - You can also print the RDD lineage information by using the command filtered.toDebugString(filtered is the RDD here).
+**Caching**
+You can cache an RDD in memory by calling rdd.cache(). When you cache an RDD, it’s Partitions are loaded into memory of the nodes that hold it.
+
+![rdd_cache](rdd_cache.png)
+
+Caching can improve the performance of your application to a great extent. In the previous section you saw that when an action is performed on a RDD, it executes it’s entire lineage. Now imagine you are going to perform an action multiple times on the same RDD which has a long lineage, this will cause an increase in execution time. Caching stores the computed result of the RDD in the memory thereby eliminating the need to recompute it every time. You can think of caching as if it is breaking the lineage, but it does remember the lineage so that it can be recomputed in case of a node failure.
+
+**Q10.Why RDD is immutable ?**
+
+Following are the reasons:
+
+	– Immutable data is always safe to share across multiple processes as well as multiple threads.
+	– Since RDD is immutable we can recreate the RDD any time. (From lineage graph).
+	– If the computation is time-consuming, in that we can cache the RDD which result in performance improvement.
+
+
+
 
 **Q9.Difference between map and flatmap?**
 
