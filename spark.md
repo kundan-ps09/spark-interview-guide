@@ -206,9 +206,22 @@ When you call a transformation, Spark does not execute it immediately, instead i
 **Caching**
 You can cache an RDD in memory by calling rdd.cache(). When you cache an RDD, it’s Partitions are loaded into memory of the nodes that hold it.
 
+	rddContainNumber.cache()
+   	println(rddContainNumber.toDebugString)
+
 ![rdd_cache](rdd_cache.png)
 
 Caching can improve the performance of your application to a great extent. In the previous section you saw that when an action is performed on a RDD, it executes it’s entire lineage. Now imagine you are going to perform an action multiple times on the same RDD which has a long lineage, this will cause an increase in execution time. Caching stores the computed result of the RDD in the memory thereby eliminating the need to recompute it every time. You can think of caching as if it is breaking the lineage, but it does remember the lineage so that it can be recomputed in case of a node failure.
+
+**Persistence**
+caching can be used to avoid recomputation of RDD lineage by saving its contents in memory. If there is not enough memory in the cluster, you can tell spark to use disk also for saving the RDD by using the method persist().
+ 
+ 	rddContainNumber.persist(StorageLevel.MEMORY_AND_DISK)
+	println(rddContainNumber.toDebugString)
+	
+In fact Caching is a type of persistence with StorageLevel -MEMORY_ONLY. If you use MEMORY_ONLY as the Storage Level and if there is not enough memory in your cluster to hold the entire RDD, then some partitions of the RDD cannot be stored in memory and will have to be recomputed every time it is needed. If you don’t want this to happen, you can use the StorageLevel - MEMORY_AND_DISK in which if an RDD does not fit in memory, the partitions that do not fit are saved to disk.
+
+![rdd_persistence](rdd_persistence.png)
 
 **Q10.Why RDD is immutable ?**
 
