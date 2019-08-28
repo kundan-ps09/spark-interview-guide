@@ -179,7 +179,7 @@ RDDs are automatically distributed across the network by means of Partitions.
 	
 Actions/Transformations:
  
- ![Screenshot](screenshot.png)
+ ![rdd_transformation](rdd_transformation.png)
 
 	
 **Q9.Difference between map and flatmap?**
