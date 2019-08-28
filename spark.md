@@ -163,7 +163,25 @@ The SparkContext allows the Spark driver application to access the cluster throu
    	.enableHiveSupport()
    	.getOrCreate()
 	
+**Q9. What is RDD?**
 
+RDDs (Resilient Distributed Datasets) are basic abstraction in Apache Spark that represent the data coming into the system in object format. RDDs are used for in-memory computations on large clusters, in a fault tolerant manner. RDDs are read-only portioned, collection of records, that are:
+
+
+	-Resilient because RDDs are immutable(can’t bemodified once created) and fault tolerant(If a node holding the partition fails 		 the other node takes the data). 
+	-Distributed because it is distributed across cluster.
+	-Dataset because it holds data.
+	
+RDDs are automatically distributed across the network by means of Partitions. 
+	
+	-RDDs are divided into smaller chunks called Partitions, and when you execute some action, a task is launched per partition. 
+	-These partitions of an RDD is distributed across all the nodes in the network.
+	
+Actions/Transformations:
+ 
+ ![Screenshot](screenshot.png)
+
+	
 **Q9.Difference between map and flatmap?**
 
 **Ans. **
