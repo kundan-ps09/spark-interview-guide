@@ -344,17 +344,22 @@ This is continued for rest of the blocks. So initially, only the driver is the s
 ![rdd_broadcast](rdd_broadcast.png)
 
 
-**Q13  Why is there a need for Accumulators when working with Apache Spark?**
+**Q13. Why is there a need for Accumulators when working with Apache Spark?**
 
 **Ans** Accumulators, as the name suggests accumulates data during execution. This is similar to Counters in Hadoop MapReduce. An accumulator is initialized at the driver and is then modified (added) by each executors. Finally all these values are aggregated back at the driver.
 
- 	val accumulator = sparkSession.sparkContext.accumulator(0,"india_counter")
-	joinedRDDONBroadcast.foreach(v => if(v._2.contains("India")) accumulator +=1)
+ 	 val accumulator = sparkSession.sparkContext.longAccumulator("india_counter")
+ 	 joinedRDDONBroadcast.foreach(v => if (v._2.contains("India")) accumulator.add(1))
+ 	 println(accumulator.value)
 
-	we cannot do below operations on accumulators of the type Int
- 	joinedRDDONBroadcast.foreach(v => if(v._2.contains("India")) accumulator -= 1) 
-  	joined.foreach(v=> if (v._2.contains("india")) accum *= 1)
- 	 //error: value *= is not a member of org.apache.spark.Accumulator[Int]
+**Q14. What is lineage graph?
+
+**Ans** The RDDs in Spark, depend on one or more other RDDs. The representation of dependencies in between RDDs is known as the lineage graph. Lineage graph information is used to compute each RDD on demand, so that whenever a part of persistent RDD is lost, the data that is lost can be recovered using the lineage graph information.
+
+**Q15. How can you trigger automatic clean-ups in Spark to handle accumulated metadata?
+
+**Ans.** You can trigger the clean-ups by setting the parameter ‘spark.cleaner.ttl’ or by dividing the long running jobs into different batches and writing the intermediary results to the disk.
+
 
 
 
