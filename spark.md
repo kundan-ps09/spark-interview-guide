@@ -302,3 +302,45 @@ Standalone is good for small Spark clusters, but it is not good for bigger clust
 YARN was created out of the necessity to scale Hadoop. Prior to YARN, resource management was embedded in Hadoop MapReduce V1 and it had to be removed in order to help MapReduce scale. The MapReduce 1 JobTracker wouldn’t practically scale beyond a couple thousand machines. The creation of YARN was essential to the next iteration of Hadoop’s lifecycle, primarily around scaling, whereas Mesos was built to be a scalable global resource manager for the entire data center.
 
 Mesos determines which resources are available, and it makes offers back to an application scheduler (the application scheduler and its executor is called a “framework”). Those offers can be accepted or rejected by the framework. This model is considered a non-monolithic model because it is a “two-level” scheduler where scheduling algorithms are pluggable. Whereas when a job request comes into the YARN resource manager, YARN evaluates all the resources available and it places the job. It’s the one making the decision of where jobs should go; thus, it is modeled in a monolithic way.
+
+**Q12.How can you minimize data transfers when working with Spark?**
+**Ans**
+Minimizing data transfers and avoiding shuffling helps write spark programs that run in a fast and reliable manner. The various ways in which data transfers can be minimized when working with Apache Spark are:
+
+	- Using Broadcast Variable- Broadcast variable enhances the efficiency of joins between small and large RDDs.
+	- Using Accumulators – Accumulators help update the values of variables in parallel while executing.
+	- The most common way is to avoid operations ByKey, repartition or any other operations which trigger shuffles.
+
+**Q13  Why is there a need for broadcast variables when working with Apache Spark?**
+**Ans** These are read only variables, present in-memory cache on every machine. When working with Spark, usage of broadcast variables eliminates the necessity to ship copies of a variable for every task, so data can be processed faster. Broadcast variables help in storing a lookup table inside the memory which enhances the retrieval efficiency when compared to an RDD lookup ().
+
+Let us first understand why we need a broadcast variable. Take a look at the below example, where names is joined with addresses.
+
+ 	val nameRDD = sparkSession.sparkContext.textFile("src/main/resources/name.txt", 2)
+    				  .map(line => (line.split(",")(0), line))
+  	val addressRDD = sparkSession.sparkContext.textFile("src/main/resources/address.txt", 2)
+                                     .map(line => (line.split(",")(0), line))
+	val joinedRDD = nameRDD.join(addressRDD)
+	
+Here, both names and addresses will be shuffled over the network for performing the join which is not efficient since any data transfer over the network will reduce the execution speed.
+
+![rdd_broadcast_shuffle](rdd_broadcast_shuffle.png)
+
+So how do we overcome this problem? By means of broadcast variables.
+
+  	val addressesMap = addressRDD.collect().toMap
+  	val broadcastAddressMap = sparkSession.sparkContext.broadcast(addressesMap)
+ 	val joinedRDDONBroadcast = nameRDD.map(v => (v._2, broadcastAddressMap.value(v._1)))
+
+If a variable is broadcasted, it will be sent to each node only once, thereby reducing network traffic.
+Broadcast variables are read-only, broadcast.value is an immutable object
+
+Spark uses BitTorrent like protocol for sending the broadcast variable across the cluster, i.e., for each variable that has to be broadcasted, initially the driver will act as the only source. The data will be split into blocks at the driver and each receiver will start fetching the block to it’s local directory. Once a block is completely received, then that reciver will also act as a source for this block for the rest of the reciver (This reduces the load at the machine running driver). 
+
+This is continued for rest of the blocks. So initially, only the driver is the source and later on the number of sources increases - because of this, rate at which the blocks are fetched by a node increases over time.
+
+![rdd_broadcast](rdd_broadcast.png)
+
+
+
+
