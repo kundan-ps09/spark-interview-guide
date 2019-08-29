@@ -304,6 +304,7 @@ YARN was created out of the necessity to scale Hadoop. Prior to YARN, resource m
 Mesos determines which resources are available, and it makes offers back to an application scheduler (the application scheduler and its executor is called a “framework”). Those offers can be accepted or rejected by the framework. This model is considered a non-monolithic model because it is a “two-level” scheduler where scheduling algorithms are pluggable. Whereas when a job request comes into the YARN resource manager, YARN evaluates all the resources available and it places the job. It’s the one making the decision of where jobs should go; thus, it is modeled in a monolithic way.
 
 **Q12.How can you minimize data transfers when working with Spark?**
+
 **Ans**
 Minimizing data transfers and avoiding shuffling helps write spark programs that run in a fast and reliable manner. The various ways in which data transfers can be minimized when working with Apache Spark are:
 
@@ -312,6 +313,7 @@ Minimizing data transfers and avoiding shuffling helps write spark programs that
 	- The most common way is to avoid operations ByKey, repartition or any other operations which trigger shuffles.
 
 **Q13  Why is there a need for broadcast variables when working with Apache Spark?**
+
 **Ans** These are read only variables, present in-memory cache on every machine. When working with Spark, usage of broadcast variables eliminates the necessity to ship copies of a variable for every task, so data can be processed faster. Broadcast variables help in storing a lookup table inside the memory which enhances the retrieval efficiency when compared to an RDD lookup ().
 
 Let us first understand why we need a broadcast variable. Take a look at the below example, where names is joined with addresses.
@@ -341,6 +343,18 @@ This is continued for rest of the blocks. So initially, only the driver is the s
 
 ![rdd_broadcast](rdd_broadcast.png)
 
+
+**Q13  Why is there a need for Accumulators when working with Apache Spark?**
+
+**Ans** Accumulators, as the name suggests accumulates data during execution. This is similar to Counters in Hadoop MapReduce. An accumulator is initialized at the driver and is then modified (added) by each executors. Finally all these values are aggregated back at the driver.
+
+ 	val accumulator = sparkSession.sparkContext.accumulator(0,"india_counter")
+	joinedRDDONBroadcast.foreach(v => if(v._2.contains("India")) accumulator +=1)
+
+	we cannot do below operations on accumulators of the type Int
+ 	joinedRDDONBroadcast.foreach(v => if(v._2.contains("India")) accumulator -= 1) 
+  	joined.foreach(v=> if (v._2.contains("india")) accum *= 1)
+ 	 //error: value *= is not a member of org.apache.spark.Accumulator[Int]
 
 
 
