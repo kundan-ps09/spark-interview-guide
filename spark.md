@@ -245,7 +245,8 @@ Another StorageLevel are :
 	Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
 	Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
 	Hadoop YARN – the resource manager in Hadoop 2.
-	Kubernetes (experimental) – an open-source system for automating deployment, scaling, and management of containerized 			applications.
+	Kubernetes (experimental) – an open-source system for automating deployment, scaling, and management of 
+	containerized applications.
 	
 -> Spark applications run as independent sets of processes on a cluster, coordinated by the SparkContext object in your main program,  	    which is called the Driver Program. 
 
@@ -285,4 +286,19 @@ A single process in a YARN container is responsible for both driving the applica
 The client that launches the application does not need to run for the lifetime of the application.
 Cluster mode is not well-suited for using Spark interactively. Spark applications that require user input, such as spark-shell and pyspark, require the Spark driver to run inside the client process that initiates the Spark application.
 
+                      ![yarn-cluster-mode](yarn-cluster-mode.png)
 
+**Client Deployment Mode**
+In client mode, the Spark driver runs on the host where the job is submitted.
+
+The ApplicationMaster is responsible only for requesting executor containers from YARN. After the containers start, the client communicates with the containers to schedule work.
+
+It supports spark-shell, as the driver runs at the client side.
+
+                       ![yarn-client-mode](yarn-client-mode.png)
+
+Standalone is good for small Spark clusters, but it is not good for bigger clusters (there is an overhead of running Spark daemons — master + slave — in cluster nodes). These daemons require dedicated resources. So standalone is not recommended for bigger production clusters.
+
+YARN was created out of the necessity to scale Hadoop. Prior to YARN, resource management was embedded in Hadoop MapReduce V1 and it had to be removed in order to help MapReduce scale. The MapReduce 1 JobTracker wouldn’t practically scale beyond a couple thousand machines. The creation of YARN was essential to the next iteration of Hadoop’s lifecycle, primarily around scaling, whereas Mesos was built to be a scalable global resource manager for the entire data center.
+
+Mesos determines which resources are available, and it makes offers back to an application scheduler (the application scheduler and its executor is called a “framework”). Those offers can be accepted or rejected by the framework. This model is considered a non-monolithic model because it is a “two-level” scheduler where scheduling algorithms are pluggable. Whereas when a job request comes into the YARN resource manager, YARN evaluates all the resources available and it places the job. It’s the one making the decision of where jobs should go; thus, it is modeled in a monolithic way.
