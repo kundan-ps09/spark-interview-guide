@@ -165,7 +165,7 @@ The SparkContext allows the Spark driver application to access the cluster throu
 	
 **Q9. What is RDD?**
 
-RDDs (Resilient Distributed Datasets) are basic abstraction in Apache Spark that represent the data coming into the system in object format. RDDs are used for in-memory computations on large clusters, in a fault tolerant manner. RDDs are read-only portioned, collection of records, that are:
+**Ans.** RDDs (Resilient Distributed Datasets) are basic abstraction in Apache Spark that represent the data coming into the system in object format. RDDs are used for in-memory computations on large clusters, in a fault tolerant manner. RDDs are read-only portioned, collection of records, that are:
 
 
 	-Resilient because RDDs are immutable(can’t bemodified once created) and fault tolerant
@@ -233,16 +233,56 @@ Another StorageLevel are :
 
 
 **Q10.Why RDD is immutable ?**
-
-Following are the reasons:
+**Ans.** Following are the reasons:
 
 	– Immutable data is always safe to share across multiple processes as well as multiple threads.
 	– Since RDD is immutable we can recreate the RDD any time. (From lineage graph).
 	– If the computation is time-consuming, in that we can cache the RDD which result in performance improvement.
 
+**Q11. Explain about the different cluster managers in Apache Spark?**
+**Ans.** The 3 different clusters managers supported in Apache Spark are:
+
+	Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
+	Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
+	Hadoop YARN – the resource manager in Hadoop 2.
+	Kubernetes (experimental) – an open-source system for automating deployment, scaling, and management of containerized 			applications.
+	
+-> Spark applications run as independent sets of processes on a cluster, coordinated by the SparkContext object in your main program,  	    which is called the Driver Program. 
+
+-> To run on a cluster, SparkContext can connect to several types of Cluster Managers, which allocate resources across applications. 
+
+-> Once the connection is established, Spark acquires executors on the nodes in the cluster to run its processes, does some 	     	    computations, and stores data for your application.
+
+-> Next, it sends your application code (defined by JAR or Python files passed to SparkContext) to the executors.
+
+-> Finally, SparkContext sends tasks to the executors to run.
+
+	![spark-cluster-manger](spark-cluster-manger.png)
+	
+**Standalone Mode**
+It is the easiest of all in terms of setup and provides almost all the same features as the other cluster managers if you are only running Spark.
+The Spark standalone mode requires each application to run an executor on every node in the cluster, whereas with YARN, you can configure the number of executors for the Spark application.	
+
+**Mesos Mode**
+Mesos consists of a master daemon that manages the agent daemons that are running on each cluster node. Mesos framework is responsible for running the tasks on these agents. The master enables fine-grained sharing of resources (CPU, RAM, …) across frameworks by giving them resource offers. The master decides how many resources to offer to each framework according to a given organizational policy, such as fair sharing or strict priority.
+
+![mesos-cluster](mesos-cluster.png)
+
+A framework running on top of Mesos consists of two components:
+
+	1. A scheduler that registers with the master to be offered resources
+	2. An executor process that is launched on agent nodes to run the framework’s tasks
+
+Agent nodes report to master about free resources available to them. The master determines how many resources are offered to each framework and the frameworks’ schedulers select which of the offered resources to be utilized. When a framework accepts the offered resources, it passes a description of the tasks it wants to run on them to Mesos. In turn, Mesos launches the tasks on the corresponding agents.
+
+**Yarn Mode**
+Spark with Yarn can be deployed in two modes.
+
+**Cluster Deployment Mode**
+In this mode, SparkDriver runs in the Application Master on Cluster host.
+A single process in a YARN container is responsible for both driving the application and requesting resources from YARN.
+
+The client that launches the application does not need to run for the lifetime of the application.
+Cluster mode is not well-suited for using Spark interactively. Spark applications that require user input, such as spark-shell and pyspark, require the Spark driver to run inside the client process that initiates the Spark application.
 
 
-
-**Q9.Difference between map and flatmap?**
-
-**Ans. **
