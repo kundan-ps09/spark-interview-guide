@@ -248,17 +248,17 @@ Another StorageLevel are :
 	Kubernetes (experimental) – an open-source system for automating deployment, scaling, and management of 
 	containerized applications.
 	
--> Spark applications run as independent sets of processes on a cluster, coordinated by the SparkContext object in your main program,  	    which is called the Driver Program. 
+Spark applications run as independent sets of processes on a cluster, coordinated by the SparkContext object in your main program,  	  which is called the Driver Program. 
 
--> To run on a cluster, SparkContext can connect to several types of Cluster Managers, which allocate resources across applications. 
+To run on a cluster, SparkContext can connect to several types of Cluster Managers, which allocate resources across applications. 
 
--> Once the connection is established, Spark acquires executors on the nodes in the cluster to run its processes, does some 	     	    computations, and stores data for your application.
+Once the connection is established, Spark acquires executors on the nodes in the cluster to run its processes, does some 	     	    computations, and stores data for your application.
 
--> Next, it sends your application code (defined by JAR or Python files passed to SparkContext) to the executors.
+Next, it sends your application code (defined by JAR or Python files passed to SparkContext) to the executors.
 
--> Finally, SparkContext sends tasks to the executors to run.
+Finally, SparkContext sends tasks to the executors to run.
 
-	![spark-cluster-manger](spark-cluster-manger.png)
+![spark-cluster-manger](spark-cluster-manger.png)
 	
 **Standalone Mode**
 It is the easiest of all in terms of setup and provides almost all the same features as the other cluster managers if you are only running Spark.
@@ -286,7 +286,7 @@ A single process in a YARN container is responsible for both driving the applica
 The client that launches the application does not need to run for the lifetime of the application.
 Cluster mode is not well-suited for using Spark interactively. Spark applications that require user input, such as spark-shell and pyspark, require the Spark driver to run inside the client process that initiates the Spark application.
 
-                      ![yarn-cluster-mode](yarn-cluster-mode.png)
+![yarn-cluster-mode](yarn-cluster-mode.png)
 
 **Client Deployment Mode**
 In client mode, the Spark driver runs on the host where the job is submitted.
@@ -295,7 +295,7 @@ The ApplicationMaster is responsible only for requesting executor containers fro
 
 It supports spark-shell, as the driver runs at the client side.
 
-                       ![yarn-client-mode](yarn-client-mode.png)
+![yarn-client-mode](yarn-client-mode.png)
 
 Standalone is good for small Spark clusters, but it is not good for bigger clusters (there is an overhead of running Spark daemons — master + slave — in cluster nodes). These daemons require dedicated resources. So standalone is not recommended for bigger production clusters.
 
